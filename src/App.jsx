@@ -1,12 +1,17 @@
-import { useState } from 'react'
-
+import { Suspense } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import routes from './routes/index';
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div className=''>Resume Builder</div>
-    </>
+   
+<Suspense fallback={<div>Loading...</div>}>
+
+<RouterProvider router={routes} />
+
+</Suspense>
+
   )
 }
 
