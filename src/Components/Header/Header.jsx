@@ -1,9 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { FaMoon } from "react-icons/fa";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { TbClipboardText } from "react-icons/tb";
+import { RxHamburgerMenu , RxCross1  } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
 function Header() {
-const navigate = useNavigate();
+   const [isOpen, setOpen] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   const navItems = [
     {
@@ -20,23 +26,55 @@ const navigate = useNavigate();
   ]
 
   return (
-    <header className='py-3 shadow bg-gray-500'>
-      <nav className='flex'>
-        <ul className='flex ml-auto'>
-          {navItems.map((item) =>
-            item.active ? (
-              <li key={item.name}>
-                <button
-                  onClick={() => navigate(item.slug)}
-                  className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
-                >{item.name}</button>
-              </li>
-            ) : null
-          )}
+    <>
+    <header className='md:px-6 lg:px-8 xl:px-18 px-4 py-3 shadow bg-[#0E0E3F] dark:bg-[#171923] dark:text-white'>
+   
+      <div className="flex wrap  justify-between">
 
-        </ul>
-      </nav>
+        <div><TbClipboardText color="white" size="40px" /></div>
+
+        <nav className='flex items-center '>
+
+
+          <ul className='ml-auto hidden md:flex'>
+            {navItems.map((item) =>
+              item.active ? (
+                <li key={item.name}>
+                  <button
+                    onClick={() => navigate(item.slug)}
+                    className='inline-bock px-6 py-2 duration-200 hover:text-white text-[#bcbcc6]'
+                  >{item.name}</button>
+                </li>
+              ) : null
+            )}
+          </ul>
+          <button className="px-6 py-2 cursor-pointer" onClick={toggleTheme}> {theme == 'light' ? <FaMoon color="white" /> : <MdOutlineWbSunny color="white" />} </button>
+
+          <button onClick={() => setOpen(!isOpen)} className="md:hidden">  { isOpen ? <RxCross1 color="white" />: <RxHamburgerMenu color="white" />}</button>
+
+        </nav>
+
+      </div>
+
     </header>
+      {/* Mobile view Menu  */}
+
+      { isOpen && (
+        <div className="sm:flex md:hidden py-3 px-6 shadow bg-[#fff]  dark:bg-[#171923] dark:text-white" >
+        <ul className=''>
+            {navItems.map((item) =>
+              item.active ? (
+                <li key={item.name} className="border-b-2">
+                  <button
+                    onClick={() => navigate(item.slug)}
+                    className='inline-bock px-0 py-2 duration-200 hover:text-white text-black dark:text-white'
+                  >{item.name}</button>
+                </li>
+              ) : null
+            )}
+          </ul> </div>)} 
+
+          </>
   );
 }
 
