@@ -14,8 +14,40 @@ export const ThemeProvider = ({ children }) => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const [selectBtn, setSelectBtn] = useState(true);
+
+
+
+
+
+
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider 
+    value={{ 
+      theme, 
+      toggleTheme,
+      selectBtn,
+      setSelectBtn
+    
+      }}>
       {children}
     </ThemeContext.Provider>
   );

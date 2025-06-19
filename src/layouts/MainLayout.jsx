@@ -9,7 +9,7 @@ function MainLayout() {
   
       <Header />
 
-      <main className="md:px-6 lg:px-8 xl:px-18 px-4 py-3">
+      <main className="md:px-6 lg:px-8 xl:px-18 px-4 py-3 dark:bg-[#1a202c] dark:text-white">
         <Outlet />
       </main>
 
