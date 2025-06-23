@@ -4,10 +4,15 @@ import ThemeTemplateData from '../../theme-db/ThemeTemplateData';
 
 function Introduction() {
 
-    const { selectBtn, setSelectBtn } = useContext(ThemeContext);
+    const { selectBtn, setSelectBtn, setCurrentTheme,showComponent,setShowComponent } = useContext(ThemeContext);
 
     const handleSelectTemplate = () => {
         setSelectBtn(!selectBtn);
+    }
+
+    const themeShow = (e) =>{
+         setShowComponent(!showComponent)
+         setCurrentTheme(e.target.id)
     }
 
     return (
@@ -25,8 +30,8 @@ function Introduction() {
                     <button onClick={handleSelectTemplate} className='mt-8 bg-[#0E0E3F] text-white py-3 rounded-xl cursor-pointer px-5' > Select Template</button>
                 </div>
                 :
-
-                <div className='lg:w-3/6 '> <h2>Select a Template from the list</h2></div>
+                <div className='lg:w-2/6 '> <h2 className='text-3xl md:text-5xl font-bold'>Select a <span className='text-[#8bca05]'>Template</span> from the list</h2>
+                </div>
 
             }
 
@@ -35,18 +40,17 @@ function Introduction() {
                     <img src="/src/assets/home-logo.png" alt="Home logo" />
                 </div>
                 :
-
-                <div className='lg:w-3/6 '>
+                <div className='lg:w-4/6 grid grid-cols-3 gap-4'>
                     {
 
                         ThemeTemplateData.map((item, index) => {
 
-                           return (
-                            <div key={item.id}> 
-                            <img id={item.id}  src={item.imageSrc} alt={item.imageAlt} />
-                            
-                            </div>
-                           )
+                            return (
+                                <div key={item.id} className='w-[200px] h-[280px] border rounded-2xl overflow-hidden cursor-pointer dark:bg-white' onClick={themeShow}>
+                                    <img id={item.id} src={item.imageSrc} alt={item.imageAlt} />
+
+                                </div>
+                            )
 
                         })
 
