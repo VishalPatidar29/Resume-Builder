@@ -13,7 +13,7 @@ function Theme1(props) {
   const { workTitles, workDesc } = themeData.workData;
   const { awards } = themeData.awardData;
   const { checkProj, checkWork, checkAward } = useContext(ThemeContext);
-console.log(Object.entries(projectDesc))
+console.log(Object.entries(educationDesc))
 
   return (
     <div id="section-to-print" ref={componentRef}>
@@ -23,9 +23,9 @@ console.log(Object.entries(projectDesc))
         <header id="info" className="text-center mt-2">
           <h2 className="text-3xl font-bold mb-2">{name}</h2>
           <p className="text-gray-600 my-1">
-            <span className="mx-2 inline-flex items-center"><ImLocation classNameName="mr-1" />{address}</span> |
-            <span className="mx-2 inline-flex items-center"><GrMail classNameName="mr-1" />{email}</span> |
-            <span className="mx-2 inline-flex items-center"><BsFillTelephoneFill classNameName="mr-1" />{phone}</span>
+            <span className="mx-2 inline-flex items-center"><ImLocation className="mr-1" />{address}</span> |
+            <span className="mx-2 inline-flex items-center"><GrMail className="mr-1" />{email}</span> |
+            <span className="mx-2 inline-flex items-center"><BsFillTelephoneFill className="mr-1" />{phone}</span>
           </p>
           <h3 className="text-lg font-semibold mt-1 mb-2">{profile}</h3>
         </header>
