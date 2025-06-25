@@ -24,8 +24,8 @@ function About() {
 
     <div className="w-20 h-20 shrink-0">
       <img
-        src="/path-to-image.jpg"
-        alt="Hardik Desai"
+        src="/my-image.jpg"
+        alt="Vishal Patidar"
         className="w-full h-full object-cover rounded-full border border-gray-200 shadow-sm"
       />
     </div>

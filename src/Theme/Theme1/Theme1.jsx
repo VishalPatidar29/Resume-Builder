@@ -13,13 +13,12 @@ function Theme1(props) {
   const { workTitles, workDesc } = themeData.workData;
   const { awards } = themeData.awardData;
   const { checkProj, checkWork, checkAward } = useContext(ThemeContext);
-console.log(Object.entries(educationDesc))
 
   return (
     <div id="section-to-print" ref={componentRef}>
       <div id="theme1" className="border border-gray-300 dark:border-white p-4">
 
-        {/*     <!-- Personal Info --> */}
+        {/*  Personal Info  */}
         <header id="info" className="text-center mt-2">
           <h2 className="text-3xl font-bold mb-2">{name}</h2>
           <p className="text-gray-600 my-1">
@@ -30,7 +29,7 @@ console.log(Object.entries(educationDesc))
           <h3 className="text-lg font-semibold mt-1 mb-2">{profile}</h3>
         </header>
 
-        {/*     <!-- Skills --> */}
+        {/*  Skills */}
         <section id="skills" className="my-2">
           <h3 className="bg-[#D2E4E1] text-gray-800 text-md px-5 py-2 font-semibold">TECHNICAL SKILLS</h3>
           <div id="skills-set" className="flex justify-center items-center">
@@ -42,7 +41,7 @@ console.log(Object.entries(educationDesc))
           </div>
         </section>
 
-        {/*     <!-- Projects --> */}
+        {/*  Projects */}
         {!checkProj && (
           <section id="projects" className="my-2">
             <h3 className="bg-[#D2E4E1] text-gray-800 text-md px-5 py-2 font-semibold">PROJECTS</h3>
@@ -61,7 +60,7 @@ console.log(Object.entries(educationDesc))
           </section>
         )}
 
-        {/*     <!-- Education --> */}
+        {/*   Education  */}
         <section id="education" className="my-2">
           <h3 className="bg-[#D2E4E1] text-gray-800 text-md px-5 py-2 font-semibold">EDUCATION</h3>
           <div id="education-set" className="mt-2">
@@ -78,7 +77,7 @@ console.log(Object.entries(educationDesc))
           </div>
         </section>
 
-        {/*    <!-- Work Experience -->  */}
+        {/*   Work Experience  */}
         {!checkWork && (
           <section id="experience" className="my-2">
             <h3 className="bg-[#D2E4E1] text-gray-800 text-md px-5 py-2 font-semibold">WORK EXPERIENCE</h3>
@@ -97,7 +96,7 @@ console.log(Object.entries(educationDesc))
           </section>
         )}
 
-        {/*    <!-- Awards --> */}
+        {/*   Awards  */}
         {!checkAward && (
           <section id="awards" className="my-2">
             <h3 className="bg-[#D2E4E1] text-gray-800 text-md px-5 py-2 font-semibold">AWARDS & ACHIEVEMENTS</h3>

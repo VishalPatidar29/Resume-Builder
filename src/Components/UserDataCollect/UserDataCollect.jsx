@@ -17,7 +17,6 @@ const UserDataCollect = () => {
     const [personalData, setPersonalData] = useState({ profileImage: 'https://www.w3schools.com/howto/img_avatar.png', name: "Your Name", summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing eli', profile: "Work Profile", address: "Address Line", phone: "Phone Number", email: "Email Address", skill: 'Your, Skills, are, shown, here', })
     const [awardData, setAwardData] = useState({ awards: 'Your Awards are shown here' })
 
-
     const handleChangePersonal = (e) => {
         const { name, value } = e.target
         setPersonalData({ ...personalData, [name]: value })
@@ -179,26 +178,25 @@ const UserDataCollect = () => {
         }));
     };
 
-
     useEffect(() => {
         setThemeData({ ...themeData, personalData, projectData, educationData, workData, awardData })
 
-    }, [themeData, personalData, setThemeData, projectData, educationData, workData, awardData])
+    }, [personalData, setThemeData, projectData, educationData, workData, awardData])
 
     return (
-        <div id="form-collect">
+        <div id="form-collect" className='w-3/12'>
             {/* Personal Details Area  */}
             <div className="mb-2">
                 <h4 className="text-lg font-semibold mb-2">Personal Details</h4>
                 <hr />
 
                 <div className="my-2">
-                    <div className="file">
+                    <div className="file flex justify-between">
                         <label htmlFor='input-file' className="cursor-pointer inline-flex items-center gap-2">
                             <i className="material-icons"><IoMdCloudUpload size={30} /></i> Select a file
                         </label>
                         <input accept="image/*" name='profileImage' onChange={handleChangePersonal} id='input-file' type='file' className="hidden" />
-                        <img className="blah mt-2" src={personalData.profileImage} alt="your profile preview" />
+                        <img className="blah mt-2" src={personalData.profileImage} alt="your profile preview" width={50}/>
                     </div>
                 </div>
                 <div className="my-2">

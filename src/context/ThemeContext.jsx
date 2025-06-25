@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 export const ThemeContext = createContext();
 
@@ -15,6 +16,16 @@ export const ThemeProvider = ({ children }) => {
   };
   
   const componentRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    onBeforePrint: () => {
+      setLoading(true);
+    },
+    onAfterPrint: () => {
+      setLoading(false);
+    },
+  });
 
   const initialData = {
       personalData: {
@@ -79,6 +90,7 @@ export const ThemeProvider = ({ children }) => {
       setCheckProj,
       checkWork,
       setCheckWork,
+      handlePrint
       }}>
       {children}
     </ThemeContext.Provider>
