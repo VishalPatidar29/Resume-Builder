@@ -4,15 +4,15 @@ import ThemeTemplateData from '../../theme-db/ThemeTemplateData';
 
 function Introduction() {
 
-    const { selectBtn, setSelectBtn, setCurrentTheme,showComponent,setShowComponent } = useContext(ThemeContext);
+    const { selectBtn, setSelectBtn, setCurrentTheme, showComponent, setShowComponent } = useContext(ThemeContext);
 
     const handleSelectTemplate = () => {
         setSelectBtn(!selectBtn);
     }
 
-    const themeShow = (e) =>{
-         setShowComponent(!showComponent)
-         setCurrentTheme(e.target.id)
+    const themeShow = (e) => {
+        setShowComponent(!showComponent)
+        setCurrentTheme(e.target.id)
     }
 
     return (
@@ -27,7 +27,7 @@ function Introduction() {
                         <div className='mt-5 flex items-center'><span className='bg-[#edf2f7] text-black px-4 py-2 rounded mr-3 font-semibold text-md'>2</span> <span>Build your resume with our easy-to-use resume builder.</span></div>
                         <div className='mt-5 flex items-center'><span className='bg-[#edf2f7] text-black px-4 py-2 rounded mr-3 font-semibold text-md'>3</span> <span>Download your professionally designed resume.</span></div>
                     </div>
-                    <button onClick={handleSelectTemplate} className='mt-8 bg-[#0E0E3F] text-white py-3 rounded-xl cursor-pointer px-5' > Select Template</button>
+                    <button onClick={handleSelectTemplate} className='mt-8  bg-teal-600 text-white font-medium py-2 px-4 rounded hover:bg-teal-700 transition cursor-pointer' > Select Template</button>
                 </div>
                 :
                 <div className='lg:w-2/6 '> <h2 className='text-3xl md:text-5xl font-bold'>Select a <span className='text-[#8bca05]'>Template</span> from the list</h2>
@@ -56,8 +56,6 @@ function Introduction() {
 
 
                     }
-
-                    <button onClick={handleSelectTemplate}>Go Back</button>
                 </div>
             }
         </div>

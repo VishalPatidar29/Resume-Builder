@@ -100,7 +100,7 @@ function Theme1(props) {
         {!checkAward && (
           <section id="awards" className="my-2">
             <h3 className="bg-[#D2E4E1] text-gray-800 text-md px-5 py-2 font-semibold">AWARDS & ACHIEVEMENTS</h3>
-            <div id="award-set" className="flex flex-wrap gap-2 mt-2">
+            <div id="award-set" className="gap-2 mt-2">
               {awards.split(',').map((element, index) => (
                 <li key={index} className="text-sm">{element}</li>
               ))}

@@ -18,14 +18,9 @@ export const ThemeProvider = ({ children }) => {
   const componentRef = useRef();
 
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    onBeforePrint: () => {
-      setLoading(true);
-    },
-    onAfterPrint: () => {
-      setLoading(false);
-    },
-  });
+    documentTitle: 'Resume',
+    contentRef: componentRef,
+  })
 
   const initialData = {
       personalData: {

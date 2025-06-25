@@ -27,7 +27,7 @@ function Header() {
 
   return (
     <>
-      <header className='md:px-6 lg:px-8 xl:px-18 px-4 py-3 shadow bg-[#0E0E3F] dark:bg-[#171923] dark:text-white'>
+      <header className='md:px-6 lg:px-8 xl:px-18 px-4 py-3 shadow bg-[#009689] dark:bg-[#171923] dark:text-white'>
 
         <div className="flex wrap  justify-between">
 
