@@ -22,9 +22,9 @@ function About() {
       </p>
     </div>
 
-    <div className="w-20 h-20 shrink-0">
+    <div className="w-40 h-40 shrink-0">
       <img
-        src="/my-image.jpg"
+        src="/src/assets/My-photo.png"
         alt="Vishal Patidar"
         className="w-full h-full object-cover rounded-full border border-gray-200 shadow-sm"
       />

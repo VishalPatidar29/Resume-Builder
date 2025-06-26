@@ -14,7 +14,7 @@ const UserDataCollect = () => {
     const [projectData, setProjectData] = useState({ 'projectTitles': { pTitle1: "Project Title " }, 'projectDesc': { pDescription1: "Project Description are Shown here , with Bullet Points" } })
     const [educationData, setEducationData] = useState({ 'educationTitles': { eTitle1: "Education Title" }, 'educationDesc': { eDescription1: "Education Description are Shown here , with Bullet Points" } })
     const [workData, setWorkData] = useState({ 'workTitles': { wTitle1: "Work Title" }, 'workDesc': { wDescription1: "Work Description are Shown here , with Bullet Points" } })
-    const [personalData, setPersonalData] = useState({ profileImage: 'https://www.w3schools.com/howto/img_avatar.png', name: "Your Name", summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing eli', profile: "Work Profile", address: "Address Line", phone: "Phone Number", email: "Email Address", skill: 'Your, Skills, are, shown, here', })
+    const [personalData, setPersonalData] = useState({ profileImage: 'https://www.w3schools.com/howto/img_avatar.png', name: "Your Name", summary: 'Highly motivated and detail-oriented professional with a strong foundation in software development, problem-solving, and cross-functional collaboration.', profile: "Work Profile", address: "Address Line", phone: "Phone Number", email: "Email Address", skill: 'Your, Skills, are, shown, here', })
     const [awardData, setAwardData] = useState({ awards: 'Your Awards are shown here' })
 
     const handleChangePersonal = (e) => {
@@ -220,18 +220,20 @@ const UserDataCollect = () => {
             </div>
 
             {/* Skills Area  */}
-            <div className="mb-2">
+            <div className="mb-2 mt-4">
 
                 <h4 className="text-lg font-semibold mb-2">Technical Skills</h4>
-                <div className="my-2">
+                 <hr />
+                <div className="my-2 mt-4">
                     <input name='skill' onChange={handleChangePersonal} type='text' placeholder='Separate skills by comma' className="w-full p-2 border rounded" />
                 </div>
             </div>
-
+       
             {/* Education Area  */}
-            <div className="mb-2">
+            <div className="mb-2 mt-4">
 
                 <h4 className="text-lg font-semibold mb-2">Education</h4>
+                 <hr />
                 <div className="my-2">
                     <button onClick={handleEducationClick} className="my-3 w-full bg-teal-600 text-white font-medium py-2 px-4 rounded hover:bg-teal-700 transition">
                         Add Education
