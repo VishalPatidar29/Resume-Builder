@@ -19,7 +19,7 @@ function BuildArea(props) {
         className="flex justify-content-between gap-6 flex-wrap mt-4 mx-2"
       >
         <UserDataCollect />
-        <div id="theme-box-border" className="w-8/12">
+        <div id="theme-box-border" className="md:w-8/12 w-full">
           {props.theme}
         </div>
       </div>

@@ -8,7 +8,7 @@ function About() {
     Build the Resume That Gets <br /> You Hired!
   </h2>
 
-  <div className=" shadow-lg rounded-xl p-8 max-w-4xl w-full flex justify-between items-center space-x-6 dark:bg-[#111828]">
+  <div className=" shadow-lg rounded-xl p-4 md:p-8 w-full md:flex  justify-between items-center space-x-6 dark:bg-[#111828]">
     <div className="flex-1">
       <p className=" text-lg leading-relaxed mb-4">
         A resume builder website is a web-based tool that allows users to
@@ -22,7 +22,7 @@ function About() {
       </p>
     </div>
 
-    <div className="w-40 h-40 shrink-0">
+    <div className="w-40 h-40 shrink-0 mt-8 md:mt-0 m-auto ">
       <img
         src="/src/assets/My-photo.png"
         alt="Vishal Patidar"

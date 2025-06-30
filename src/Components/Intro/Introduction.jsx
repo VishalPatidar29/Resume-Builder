@@ -30,7 +30,7 @@ function Introduction() {
                     <button onClick={handleSelectTemplate} className='mt-8  bg-teal-600 text-white font-medium py-2 px-4 rounded hover:bg-teal-700 transition cursor-pointer' > Select Template</button>
                 </div>
                 :
-                <div className='lg:w-2/6 '> <h2 className='text-3xl md:text-5xl font-bold'>Select a <span className='text-[#009689]'>Template</span> from the list</h2>
+                <div className='lg:w-2/6 md:w-2/6'> <h2 className='text-3xl md:text-5xl font-bold'>Select a <span className='text-[#009689]'>Template</span> from the list</h2>
                 </div>
 
             }
@@ -40,7 +40,7 @@ function Introduction() {
                     <img src="/src/assets/home-logo.png" alt="Home logo" />
                 </div>
                 :
-                <div className='lg:w-4/6 grid grid-cols-3 gap-4'>
+                <div className='lg:w-4/6 md-w-4/6 flex flex-wrap gap-6 justify-center mt-6 md:mt-0'>
                     {
 
                         ThemeTemplateData.map((item, index) => {

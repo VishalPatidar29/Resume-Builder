@@ -48,7 +48,7 @@ function Header() {
                 ) : null
               )}
             </ul>
-            <button className="px-3 py-2 rounded cursor-pointer" onClick={toggleTheme}> {theme == 'light' ? <FaMoon color="#bcbcc6" className="hover:fill-white" /> : <MdOutlineWbSunny color="#bcbcc6" className="hover:fill-white" />} </button>
+            <button className="px-3 mx-5 md:mx-0 py-2 rounded cursor-pointer" onClick={toggleTheme}> {theme == 'light' ? <FaMoon color="#bcbcc6" className="hover:fill-white" /> : <MdOutlineWbSunny color="#bcbcc6" className="hover:fill-white" />} </button>
 
             <button onClick={() => setOpen(!isOpen)} className="md:hidden">  {isOpen ? <RxCross1 color="white" /> : <RxHamburgerMenu color="white" />}</button>
 

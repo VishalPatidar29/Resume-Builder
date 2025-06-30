@@ -184,7 +184,7 @@ const UserDataCollect = () => {
     }, [personalData, setThemeData, projectData, educationData, workData, awardData])
 
     return (
-        <div id="form-collect" className='w-3/12'>
+        <div id="form-collect" className='md:w-3/12 w-full'>
             {/* Personal Details Area  */}
             <div className="mb-2">
                 <h4 className="text-lg font-semibold mb-2">Personal Details</h4>
