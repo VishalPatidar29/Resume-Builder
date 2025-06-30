@@ -13,10 +13,10 @@ function Theme4(props) {
 
     return (
         <div className='border border-gray-300 dark:border-white'>
-            <div ref={componentRef} >
-                <div id="theme4" className="font-sans text-gray-800 p-10">
+            <div ref={componentRef} id="section-to-print" className="font-sans text-gray-800 break-all" >
+                <div id="theme4" >
                     <div className="flex">
-                        <div className="w-4/12 bg-sky-300 p-5">
+                        <div className="w-4/12 bg-sky-300 p-8">
                             <h1 className="text-4xl font-bold mb-3">{name}</h1>
                             <p className="flex items-center mb-2 break-words">
                                 <FaEnvelope className="mr-2" /> {email}
@@ -32,7 +32,7 @@ function Theme4(props) {
                             </p>
                         </div>
 
-                        <div className="bg-blue-100 p-5 w-8/12">
+                        <div className="bg-blue-100 p-8 w-8/12">
                             <h2 className="text-2xl mb-3">Professional Summary</h2>
                             <p className="text-base break-words  leading-relaxed">{summary || "summary"}</p>
                         </div>
@@ -43,7 +43,7 @@ function Theme4(props) {
 
                     <div className="flex">
 
-                        <div className="bg-blue-100 p-5 w-4/12">
+                        <div className="bg-blue-100 p-8 w-4/12">
                             <h2 className="text-xl mb-3">Skills</h2>
                             <ul className="list-disc list-inside text-base mb-5">
                                 {skill.split(",").map((item, index) => (
@@ -64,7 +64,7 @@ function Theme4(props) {
                             ))}
                         </div>
 
-                        <div className="bg-white p-5 col-span-1 w-8/12">
+                        <div className="bg-white p-8 col-span-1 w-8/12">
                             {!checkWork && (
                                 <>
                                     <h2 className="text-xl mb-3">Professional Experience</h2>

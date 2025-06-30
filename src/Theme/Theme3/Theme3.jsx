@@ -13,14 +13,14 @@ function Theme3(props) {
 
     return (
         <div className='border border-gray-300 dark:border-white'>
-            <div id="section-to-print" ref={componentRef} className="p-12">
+            <div id="section-to-print" ref={componentRef} className="p-12 break-all">
                 <div id="theme3">
-                    <header className="flex justify-between items-center text-center mb-4">
+                    <header className="flex justify-between items-center text-center mb-4" >
                         <div className="text-left">
                             <h2 className="text-4xl text-[#822727] font-serif mb-2">{name}</h2>
                             <p className="font-semibold text-md mb-2 font-serif">{profile}</p>
                             <div className="mt-3 font-serif text-sm">
-                                <p className="w-[190px]">{address}</p>
+                                <p>{address}</p>
                                 <p>{phone}</p>
                                 <p>{email}</p>
                             </div>
@@ -124,7 +124,7 @@ function Theme3(props) {
                                     <h3 className="font-serif font-bold text-lg w-3/12">
                                         Achievement
                                     </h3>
-                                    <div className="w-9/12 grid grid-cols-2 gap-2">
+                                    <div className="w-9/12">
                                         {awards.split(",").map((item, index) => (
                                             <div key={index} className="flex items-center">
                                                 <div className="w-[6px] h-[6px] bg-black"></div>

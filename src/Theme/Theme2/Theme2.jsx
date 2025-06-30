@@ -15,7 +15,7 @@ function Theme2(props) {
 
   return (
     <div className='border border-gray-300 dark:border-white'>
-      <div id="section-to-print" ref={componentRef} className="p-10">
+      <div id="section-to-print" ref={componentRef} className="p-10 break-all">
         <div id="theme2">
           <header className="text-center m-2 flex justify-between items-center">
             <div className="text-left w-9/12" >

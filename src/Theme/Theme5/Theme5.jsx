@@ -14,8 +14,8 @@ function Theme5(props) {
 
     return (
    <div className='border border-gray-300 dark:border-white'>
-  <div ref={componentRef}>
-    <div id="theme5" className="font-sans text-gray-800 dark:text-white">
+  <div ref={componentRef} className="font-sans text-gray-800 dark:text-white break-all">
+    <div id="theme5" >
 
       <div className="bg-[#3d3e42] text-white text-center py-6 mb-6 flex justify-center">
         <div className='border-2 border-[#8e8f93] w-max px-26 py-4'>
@@ -47,14 +47,14 @@ function Theme5(props) {
           </div>
 
           {/* LANGUAGES */}
-          <div className="mb-6">
+       {/*    <div className="mb-6">
             <h3 className="text-md font-semibold pb-1 mb-2 dark:text-white">LANGUAGES</h3>
             <ul className="list-disc list-inside text-sm dark:text-white">
               <li>English - Proficient</li>
               <li>Hindi - Intermediate</li>
               <li>French - Elementary</li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div className="border border-gray-300 mr-10 ml-4 dark:border-white"></div>
