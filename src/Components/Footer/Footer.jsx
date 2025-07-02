@@ -7,14 +7,14 @@ function Footer() {
   const date = new Date();
 
   return (
-    <footer class="bg-[#009689] dark:bg-gray-900 text-gray-700 dark:text-gray-200 md:px-6 lg:px-8 xl:px-18 px-4 py-3">
-      <div class="flex flex-col md:flex-row items-center justify-center md:justify-between text-center md:text-left space-y-4 md:space-y-0">
+    <footer className="bg-[#009689] dark:bg-gray-900 text-gray-700 dark:text-gray-200 md:px-6 lg:px-8 xl:px-18 px-4 py-3">
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between text-center md:text-left space-y-4 md:space-y-0">
 
 
         <TbClipboardText color="white" size="40px" />
 
 
-        <p class="text-sm text-white">© {date.getFullYear()} Resume Builder, All rights reserved</p>
+        <p className="text-sm text-white">© {date.getFullYear()} Resume Builder, All rights reserved</p>
 
         <div className="flex space-x-6">
           <a   target='_blank'

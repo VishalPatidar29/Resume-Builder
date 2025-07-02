@@ -1,16 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { IoMdCloudUpload } from 'react-icons/io'
-import { ThemeContext } from '../../context/ThemeContext'
+import React, { useContext, useEffect, useState } from 'react';
+import { IoMdCloudUpload } from 'react-icons/io';
+import { ThemeContext } from '../../context/ThemeContext';
+import { AiFillDelete } from "react-icons/ai";
+
 
 const UserDataCollect = () => {
-    const { themeData, checkAward, setCheckAward, setThemeData, checkProj, checkWork, setCheckProj, setCheckWork } = useContext(ThemeContext)
+    const { themeData, checkAward, setCheckAward, setThemeData, checkProj, checkWork, setCheckProj, setCheckWork, currentTheme } = useContext(ThemeContext)
 
     const [projectCount, setProjectCount] = useState(0)
     const [educationCount, setEducationCount] = useState(0)
     const [workCount, setWorkCount] = useState(0)
-    const [projArrTemplate, setProjArrTemplate] = useState([])
-    const [educationArrTemplate, setEducationArrTemplate] = useState([])
-    const [workArrTemplate, setWorkArrTemplate] = useState([])
+    const [projArrTemplate, setProjArrTemplate] = useState([
+        { id: 1 }
+    ]);
+    const [educationArrTemplate, setEducationArrTemplate] = useState([
+        { id: 1 }
+    ]);
+    const [workArrTemplate, setWorkArrTemplate] = useState([
+        { id: 1 }
+    ]);
     const [projectData, setProjectData] = useState({ 'projectTitles': { pTitle1: "Project Title " }, 'projectDesc': { pDescription1: "Project Description are Shown here , with Bullet Points" } })
     const [educationData, setEducationData] = useState({ 'educationTitles': { eTitle1: "Education Title" }, 'educationDesc': { eDescription1: "Education Description are Shown here , with Bullet Points" } })
     const [workData, setWorkData] = useState({ 'workTitles': { wTitle1: "Work Title" }, 'workDesc': { wDescription1: "Work Description are Shown here , with Bullet Points" } })
@@ -25,43 +33,71 @@ const UserDataCollect = () => {
         }
     }
 
-    /* Add the Projects  */
-    const handleChangeProject = (e) => {
-        const { name, value, id } = e.target
-        let tempProjectData = projectData
-        if (name.includes('pName')) {
-            tempProjectData["projectTitles"][id] = value;
-        } else {
-            tempProjectData["projectDesc"][id] = value;
-        }
-        setProjectData({ ...projectData, tempProjectData })
-        setThemeData({ ...themeData, projectData: projectData })
-    }
+    const deleteFormData = (id, type) => {
+        // Map type to state setters
+        let setTemplate, setCount, setData;
 
-    const handleProjectClick = (e) => {
-        e.preventDefault();
-        let i = projectCount
-        ++i;
-        const template = (
-            <>
-                <div className="my-2">
-                    <input disabled={checkProj} id={`pTitle${i}`} name='pName' onChange={handleChangeProject} type='text' placeholder='Enter Project Title' className="w-full p-2 border rounded" />
-                </div>
-                <div className="my-2">
-                    <textarea disabled={checkProj} id={`pDescription${i}`} name='pDescription' onChange={handleChangeProject} placeholder='Use comma to separate Description' className="w-full p-2 border rounded"></textarea>
-                </div>
-            </>
-        )
-        let arr = projArrTemplate
-        arr.push(template)
-        setProjArrTemplate(arr)
-        setProjectCount(i)
-    }
+        let titleKey = '';
+        let descKey = '';
+
+        switch (type) {
+            case 'education':
+                setTemplate = setEducationArrTemplate;
+                setCount = setEducationCount;
+                setData = setEducationData;
+                titleKey = `eTitle${id}`;
+                descKey = `eDescription${id}`;
+                break;
+
+            case 'work':
+                setTemplate = setWorkArrTemplate;
+                setCount = setWorkCount;
+                setData = setWorkData;
+                titleKey = `wTitle${id}`;
+                descKey = `wDescription${id}`;
+                break;
+
+            case 'project':
+                setTemplate = setProjArrTemplate;
+                setCount = setProjectCount;
+                setData = setProjectData;
+                titleKey = `pTitle${id}`;
+                descKey = `pDescription${id}`;
+                break;
+
+            default:
+                console.warn("Invalid type for deleteFormData:", type);
+                return;
+        }
+
+        // 1. Remove from template array
+        setTemplate(prev => {
+            const updated = prev.filter(item => item.id !== id);
+            setCount(updated.length);
+            return updated;
+        });
+
+        // 2. Remove from corresponding data
+        setData(prev => {
+            const updatedTitles = { ...prev[`${type}Titles`] };
+            const updatedDesc = { ...prev[`${type}Desc`] };
+            delete updatedTitles[titleKey];
+            delete updatedDesc[descKey];
+
+            return {
+                ...prev,
+                [`${type}Titles`]: updatedTitles,
+                [`${type}Desc`]: updatedDesc,
+            };
+        });
+    };
+
 
     /* Add the Education  */
     const handleChangeEducation = (e) => {
         const { name, value, id } = e.target
-        let tempEducationData = educationData
+        let tempEducationData = { ...educationData }
+
         if (name.includes('eName')) {
             tempEducationData["educationTitles"][id] = value;
         } else {
@@ -72,44 +108,31 @@ const UserDataCollect = () => {
 
     const handleEducationClick = (e) => {
         e.preventDefault();
-        let i = educationCount;
+        const newId = Date.now();
 
-        ++i;
-        const template = (<>
-            <div className="my-2">
-                <label htmlFor={`eTitle${i}`} className="block text-sm font-medium text-gray-700 mb-1">
-                    Title <span className="text-red-500">*</span>
-                </label>
-                <input
-                    id={`eTitle${i}`}
-                    name="eName"
-                    onChange={handleChangeEducation}
-                    type="text"
-                    placeholder="Enter Title"
-                    required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                />
-            </div>
+        setEducationArrTemplate(prev => [...prev, { id: newId }]);
+        setEducationCount(prev => prev + 1);
+    };
 
-            <div className="my-2">
-                <label htmlFor={`eDescription${i}`} className="block text-sm font-medium text-gray-700 mb-1">
-                    Description <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                    id={`eDescription${i}`}
-                    name="eDescription"
-                    onChange={handleChangeEducation}
-                    placeholder="Use comma to separate Description"
-                    required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                ></textarea>
-            </div>
-        </>);
+    /* Add the Projects  */
+    const handleChangeProject = (e) => {
+        const { name, value, id } = e.target
+        let tempProjectData = projectData
+        if (name.includes('pName')) {
+            tempProjectData["projectTitles"][id] = value;
+        } else {
+            tempProjectData["projectDesc"][id] = value;
+        }
+        setProjectData({ ...projectData, tempProjectData })
+        // setThemeData({ ...themeData, projectData: projectData })
+    }
 
-        let arr = educationArrTemplate
-        arr.push(template)
-        setEducationArrTemplate(arr)
-        setEducationCount(i)
+    const handleProjectClick = (e) => {
+        e.preventDefault();
+        const newId = Date.now();
+
+        setProjArrTemplate(prev => [...prev, { id: newId }]);
+        setProjectCount(prev => prev + 1);
     }
 
     /* Add the Work Experience  */
@@ -123,49 +146,15 @@ const UserDataCollect = () => {
             tempWorkData.workDesc[id] = value;
         }
 
-        setWorkData(tempWorkData);
+        setWorkData({ ...workData }, tempWorkData);
     };
 
     const handleWorkClick = (e) => {
         e.preventDefault();
-        let i = workCount + 1;
+        const newId = Date.now();
 
-        const template = (
-            <div key={i}>
-                <div className="my-2">
-                    <label htmlFor={`wTitle${i}`} className="block text-sm font-medium text-gray-700 mb-1">
-                        Job Title <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                        id={`wTitle${i}`}
-                        name="wName"
-                        type="text"
-                        onChange={handleChangeWork}
-                        placeholder="Enter Job Title"
-                        required
-                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    />
-                </div>
-
-                <div className="my-2">
-                    <label htmlFor={`wDescription${i}`} className="block text-sm font-medium text-gray-700 mb-1">
-                        Description <span className="text-red-500">*</span>
-                    </label>
-                    <textarea
-                        id={`wDescription${i}`}
-                        name="wDescription"
-                        onChange={handleChangeWork}
-                        placeholder="Use comma to separate Description"
-                        required
-                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    ></textarea>
-                </div>
-            </div>
-        );
-
-        const arr = [...workArrTemplate, template];
-        setWorkArrTemplate(arr);
-        setWorkCount(i);
+        setWorkArrTemplate(prev => [...prev, { id: newId }]);
+        setWorkCount(prev => prev + 1);
     };
 
     /* Add the AWARDS & ACHIEVEMENTS  */
@@ -189,16 +178,16 @@ const UserDataCollect = () => {
             <div className="mb-2">
                 <h4 className="text-lg font-semibold mb-2">Personal Details</h4>
                 <hr />
-
-                <div className="my-2">
+                {currentTheme == "Theme2" && <div className="my-2">
                     <div className="file flex justify-between">
                         <label htmlFor='input-file' className="cursor-pointer inline-flex items-center gap-2">
                             <i className="material-icons"><IoMdCloudUpload size={30} /></i> Select a file
                         </label>
                         <input accept="image/*" name='profileImage' onChange={handleChangePersonal} id='input-file' type='file' className="hidden" />
-                        <img className="blah mt-2" src={personalData.profileImage} alt="your profile preview" width={50}/>
+                        <img className="blah mt-2" src={personalData.profileImage} alt="your profile preview" width={50} />
                     </div>
-                </div>
+                </div>}
+
                 <div className="my-2">
                     <input name='name' onChange={handleChangePersonal} type='text' placeholder='Enter Your Name' className="w-full p-2 border rounded" />
                 </div>
@@ -223,23 +212,57 @@ const UserDataCollect = () => {
             <div className="mb-2 mt-4">
 
                 <h4 className="text-lg font-semibold mb-2">Technical Skills</h4>
-                 <hr />
+                <hr />
                 <div className="my-2 mt-4">
                     <input name='skill' onChange={handleChangePersonal} type='text' placeholder='Separate skills by comma' className="w-full p-2 border rounded" />
                 </div>
             </div>
-       
+
             {/* Education Area  */}
             <div className="mb-2 mt-4">
 
                 <h4 className="text-lg font-semibold mb-2">Education</h4>
-                 <hr />
+                <hr />
                 <div className="my-2">
-                    <button onClick={handleEducationClick} className="my-3 w-full bg-teal-600 text-white font-medium py-2 px-4 rounded hover:bg-teal-700 transition">
+                    <button onClick={handleEducationClick} className="my-3 w-full bg-teal-600 text-white font-medium py-2 px-4 rounded hover:bg-teal-700 transition cursor-pointer">
                         Add Education
                     </button>
                     {
-                        (educationCount > 0) ? educationArrTemplate.map((element, index) => <div key={index}>{element}</div>) : null
+                        (educationCount >= 0) ? educationArrTemplate.map((item) => {
+                            const id = item.id;
+                            return (
+                                <div key={id} className="my-2">
+                                    <div className="flex justify-between">
+                                        <label htmlFor={`eTitle${id}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                            Title
+                                        </label>
+                                        <AiFillDelete onClick={() => deleteFormData(id, "education")} className="cursor-pointer text-red-500" />
+                                    </div>
+                                    <input
+                                        id={`eTitle${id}`}
+                                        name="eName"
+                                        onChange={handleChangeEducation}
+                                        type="text"
+                                        placeholder="Enter Title"
+                                        className="w-full border border-gray-300 rounded px-3 py-2"
+                                    />
+
+                                    <div className="my-2">
+                                        <label htmlFor={`eDescription${id}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                            Description
+                                        </label>
+                                        <textarea
+                                            id={`eDescription${id}`}
+                                            name="eDescription"
+                                            onChange={handleChangeEducation}
+                                            placeholder="Use comma to separate Description"
+                                            className="w-full border border-gray-300 rounded px-3 py-2"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            );
+                        })
+                            : null
                     }
 
                 </div>
@@ -256,10 +279,17 @@ const UserDataCollect = () => {
                             checked={!checkProj}
                             onChange={() => setCheckProj(!checkProj)}
                         />
-                        <div className="w-11 h-6 bg-gray-300 peer-checked:bg-teal-500 rounded-full peer relative transition duration-200">
-                            <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-full"></div>
+                        <div class="relative w-11 h-6 bg-gray-300 rounded-full peer 
+                        dark:bg-gray-700 peer-checked:bg-teal-500 dark:peer-checked:bg-teal-500
+                        after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
+                        after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
+                        after:transition-all after:duration-200
+                        peer-checked:after:translate-x-full peer-checked:after:border-white
+                        rtl:peer-checked:after:-translate-x-full dark:border-gray-600">
                         </div>
                     </label>
+
+
                 </div>
 
                 <hr className="my-2" />
@@ -267,16 +297,34 @@ const UserDataCollect = () => {
                 <button
                     disabled={checkProj}
                     onClick={handleProjectClick}
-                    className={`my-3 w-full text-white font-medium py-2 px-4 rounded transition ${checkProj
+                    className={`my-3 w-full text-white font-medium py-2 px-4 rounded transition  ${checkProj
                         ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-teal-600 hover:bg-teal-700'
+                        : 'bg-teal-600 hover:bg-teal-700 cursor-pointer'
                         }`}
                 >
                     Add Projects
                 </button>
 
-                {projectCount > 0
-                    ? projArrTemplate.map((element, index) => <div key={index}>{element}</div>)
+                {projectCount >= 0
+                    ? projArrTemplate.map((item) => {
+                        const id = item.id;
+                        return (<div key={id}>
+                            <div className="flex justify-between">
+                                <label htmlFor={`pTitle${id}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                    Project Title
+                                </label>
+                                <AiFillDelete onClick={() => deleteFormData(id, "project")} className="cursor-pointer text-red-500" />
+                            </div>
+                            <div className="my-2">
+                                <input disabled={checkProj} id={`pTitle${id}`} name='pName' onChange={handleChangeProject} type='text' placeholder='Enter Project Title' className="w-full p-2 border rounded" />
+                            </div>
+                            <div className="my-2">
+                                <textarea disabled={checkProj} id={`pDescription${id}`} name='pDescription' onChange={handleChangeProject} placeholder='Use comma to separate Description' className="w-full p-2 border rounded"></textarea>
+                            </div>
+                        </div>
+                        );
+
+                    })
                     : null}
             </div>
 
@@ -291,8 +339,13 @@ const UserDataCollect = () => {
                             checked={!checkWork}
                             onChange={() => setCheckWork(!checkWork)}
                         />
-                        <div className="w-11 h-6 bg-gray-300 peer-checked:bg-teal-500 rounded-full peer relative transition duration-200">
-                            <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-full"></div>
+                        <div class="relative w-11 h-6 bg-gray-300 rounded-full peer 
+                        dark:bg-gray-700 peer-checked:bg-teal-500 dark:peer-checked:bg-teal-500
+                        after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
+                        after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
+                        after:transition-all after:duration-200
+                        peer-checked:after:translate-x-full peer-checked:after:border-white
+                        rtl:peer-checked:after:-translate-x-full dark:border-gray-600">
                         </div>
                     </label>
                 </div>
@@ -304,16 +357,52 @@ const UserDataCollect = () => {
                     onClick={handleWorkClick}
                     className={`my-3 w-full text-white font-medium py-2 px-4 rounded transition ${checkWork
                         ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-teal-600 hover:bg-teal-700'
+                        : 'bg-teal-600 hover:bg-teal-700 cursor-pointer'
                         }`}
                 >
                     Add Experience
                 </button>
 
-                {workCount > 0 &&
-                    workArrTemplate.map((element, index) => (
-                        <div key={index}>{element}</div>
-                    ))}
+                {workCount >= 0 &&
+                    workArrTemplate.map((item) => {
+                        const id = item.id;
+                        return (
+                            <div key={id}>
+                                <div className="my-2">
+                                    <div className="flex justify-between">
+                                        <label htmlFor={`wTitle${id}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                            Job Title
+                                        </label>
+                                        <AiFillDelete onClick={() => deleteFormData(id, "work")} className="cursor-pointer text-red-500" />
+                                    </div>
+                                    <input
+                                        id={`wTitle${id}`}
+                                        name="wName"
+                                        type="text"
+                                        onChange={handleChangeWork}
+                                        placeholder="Enter Job Title"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                    />
+
+                                </div>
+
+                                <div className="my-2">
+                                    <label htmlFor={`wDescription${id}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        Description
+                                    </label>
+                                    <textarea
+                                        id={`wDescription${id}`}
+                                        name="wDescription"
+                                        onChange={handleChangeWork}
+                                        placeholder="Use comma to separate Description"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                    ></textarea>
+                                </div>
+                            </div>
+                        )
+                    })
+
+                }
             </div>
 
             {/* Awards & Achievement */}
@@ -327,8 +416,13 @@ const UserDataCollect = () => {
                             checked={!checkAward}
                             onChange={() => setCheckAward(!checkAward)}
                         />
-                        <div className="w-11 h-6 bg-gray-300 peer-checked:bg-teal-500 rounded-full peer relative transition duration-200">
-                            <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-full"></div>
+                        <div class="relative w-11 h-6 bg-gray-300 rounded-full peer 
+                        dark:bg-gray-700 peer-checked:bg-teal-500 dark:peer-checked:bg-teal-500
+                        after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
+                        after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
+                        after:transition-all after:duration-200
+                        peer-checked:after:translate-x-full peer-checked:after:border-white
+                        rtl:peer-checked:after:-translate-x-full dark:border-gray-600">
                         </div>
                     </label>
                 </div>
@@ -337,7 +431,7 @@ const UserDataCollect = () => {
 
                 <div className="my-2">
                     <label htmlFor="awards" className="block text-sm font-medium text-gray-700 mb-1">
-                        Achievements <span className="text-red-500">*</span>
+                        Achievements
                     </label>
                     <textarea
                         id="awards"
@@ -346,7 +440,7 @@ const UserDataCollect = () => {
                         onChange={handleChangeAwards}
                         placeholder="Use comma to separate Achievement"
                         required
-                        className={`w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 ${checkAward ? 'bg-gray-100 cursor-not-allowed' : ''
+                        className={`w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 ${checkAward ? 'bg-gray-100 cursor-not-allowed text-black' : ''
                             }`}
                     ></textarea>
                 </div>
