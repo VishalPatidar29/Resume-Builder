@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import myPhoto from '../assets/My-photo.png'
 
 function About() {
   return (
@@ -24,7 +25,7 @@ function About() {
 
     <div className="w-40 h-40 shrink-0 mt-8 md:mt-0 m-auto ">
       <img
-        src="/src/assets/My-photo.png"
+        src={myPhoto}
         alt="Vishal Patidar"
         className="w-full h-full object-cover rounded-full border border-gray-200 shadow-sm"
       />
