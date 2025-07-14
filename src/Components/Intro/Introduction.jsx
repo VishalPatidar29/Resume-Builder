@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
 import ThemeTemplateData from '../../theme-db/ThemeTemplateData';
+import Homelogo from '../../assets/home-logo.png';
 
 function Introduction() {
 
@@ -37,7 +38,7 @@ function Introduction() {
 
             {selectBtn ?
                 <div className='lg:w-3/6 hidden lg:flex flex-col'>
-                    <img src="/src/assets/home-logo.png" alt="Home logo" />
+                    <img src={Homelogo} alt="Home logo" />
                 </div>
                 :
                 <div className='lg:w-4/6 md-w-4/6 flex flex-wrap gap-6 justify-center mt-6 md:mt-0'>
