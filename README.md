@@ -3,7 +3,7 @@
 A modern, user-friendly Resume Builder that helps users craft personalized, professional resumes with ease. Featuring pre-designed templates and simple tools, it streamlines the resume creation process — ideal for job seekers, students, and professionals.
 
 ## 🔗 Live Demo
-[Visit Website](#) *(Add your live site URL here if deployed)*
+[Visit Website](#) *(https://resume-builder-ten-sooty.vercel.app/)*
 
 ## 🚀 Features
 
